@@ -1,21 +1,6 @@
 version: 2.1
 
 jobs:
-  create_infrastructure:
-    docker:
-      - image: amazon/aws-cli
-    steps:
-      - checkout
-      - run:
-          name: Ensure backend infrastructure exist
-          command: |   #Do not need --profile parameter because the environment variables already have the info about main user of the container
-            aws cloudformation deploy \
-              --template-file template.yml \
-              --stack-name my-stack-UDACITY-circleci
-  wait_infrastructure_creation:
-    machine: true
-    steps:
-      - run: sleep 120
   config_infrastructure:
     docker:
       - image: python:3.7-alpine3.11
@@ -28,26 +13,10 @@ jobs:
           command: |
             apk add --update ansible
       - run:
-          name: Create inventory.txt
-          command: |
-            echo [all] > inventory.txt
-      - run:
-          name: Get address
-          command: |
-            aws ec2 describe-instances \
-            --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --output text >> inventory.txt
-      - run:
           name: Configure server
           command: |
             ansible-playbook -i inventory.txt playbook.yml
 workflows:
   my_workflow:
     jobs:
-      - create_infrastructure
-      - config_infrastructure:
-          requires:
-            - create_infrastructure
-      - wait_infrastructure_creation:
-          requires:
-            - create_infrastructure
+      - config_infrastructure
