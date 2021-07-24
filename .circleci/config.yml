@@ -15,7 +15,7 @@ jobs:
       - run: apk add --update curl
       - run:
           name: smoke test
-          command: |
+          command: |  #simulate error
             URL="https://blog.udacity333.com/"
             if curl -s --head ${URL}
             then
@@ -24,7 +24,7 @@ jobs:
               return 1
             fi
       - run:
-          command: "only_if_error"
+          command: only_if_error
           when: on_fail
     
   config_infrastructure:
