@@ -21,11 +21,6 @@ jobs:
           command: |
             export ANSIBLE_HOST_KEY_CHECKING=False
       - run:
-          name: kill node process
-          command: |
-            pm2 kill
-          ignore_errors: true
-      - run:
           name: Configure server
           command: |
             ansible-playbook playbook.yml -i inventory

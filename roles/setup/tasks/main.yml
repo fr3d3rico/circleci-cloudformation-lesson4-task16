@@ -39,6 +39,11 @@
     src: "files/index.js"
     dest: "~/web/index.js"
 
+- name: kill process
+  shell: |
+    pm2 kill
+  ignore_errors: true
+
 - name: Executing node
   shell: |
     pm2 start ~/web/index.js -f
