@@ -1,5 +1,12 @@
 version: 2.1
 
+commands:
+  only_if_error:
+    steps:
+      - run: 
+          name: Error while trying deploy!
+          command: echo "Fred, Error!"
+
 jobs:
   smoke_test:
     docker:
@@ -16,6 +23,8 @@ jobs:
             else
               return 1
             fi
+      - only_if_error:
+        when: on_fail
     
   config_infrastructure:
     docker:
