@@ -40,5 +40,5 @@ workflows:
   my_workflow:
     jobs:
       - config_infrastructure:
-        requires:
-          - configure_aws
+          requires:
+            - configure_aws
