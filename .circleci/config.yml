@@ -21,6 +21,13 @@ jobs:
           command: |
             export ANSIBLE_HOST_KEY_CHECKING=False
       - run:
+          name: inventory
+          command: |
+            echo [all] > inventory
+            aws ec2 describe-instances \
+            --query 'Reservations[*].Instances[*].PublicIpAddress' \
+            --output text >> inventory
+      - run:
           name: Configure server
           command: |
             ansible-playbook playbook.yml -i inventory
