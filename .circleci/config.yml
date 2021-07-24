@@ -23,6 +23,8 @@ jobs:
             else
               return 1
             fi
+      - only_if_error
+          when: on_fail
     
   config_infrastructure:
     docker:
