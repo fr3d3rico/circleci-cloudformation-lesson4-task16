@@ -24,7 +24,7 @@ jobs:
               return 1
             fi
       - run: "only_if_error"
-        when: on_fail
+          when: on_fail
     
   config_infrastructure:
     docker:
