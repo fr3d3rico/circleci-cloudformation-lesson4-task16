@@ -1,19 +1,6 @@
 version: 2.1
 
 jobs:
-  configure_aws:
-    docker: 
-      - image: amazon/aws-cli
-    steps:
-      - checkout
-      - run:
-          name: Create inventory file
-          command: |
-            echo [all] > inventory
-            
-            aws ec2 describe-instances \
-            --query "Reservations[*].Instances[*].PublicIpAddress" \
-            --output text >> inventory
   config_infrastructure:
     docker:
       - image: python:3.7-alpine3.11
@@ -30,11 +17,6 @@ jobs:
           command: |
              ansible all --list-hosts
       - run:
-          name: aws describe-instances
-          command: |
-             aws ec2 describe-instances \
-             --query "Reservations[*].Instances[*].PublicIpAddress" 
-      - run:
           name: export ANSIBLE_HOST_KEY_CHECKING
           command: |
             export ANSIBLE_HOST_KEY_CHECKING=False
@@ -45,7 +27,4 @@ jobs:
 workflows:
   my_workflow:
     jobs:
-      - configure_aws
-      - config_infrastructure:
-          requires:
-            - configure_aws
+      - config_infrastructure
