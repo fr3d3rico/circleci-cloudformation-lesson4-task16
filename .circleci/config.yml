@@ -10,9 +10,12 @@ jobs:
           name: Create inventory file
           command: |
             echo [all] > inventory
+            
             aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --output text 
+            --output text >> inventory
+            
+            echo inventory
   config_infrastructure:
     docker:
       - image: python:3.7-alpine3.11
