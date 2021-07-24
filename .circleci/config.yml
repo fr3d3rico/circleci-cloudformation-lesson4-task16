@@ -23,7 +23,8 @@ jobs:
       - run:
           name: kill node process
           command: |
-            killall nodejs
+            pm2 kill
+          ignore_errors: true
       - run:
           name: Configure server
           command: |
