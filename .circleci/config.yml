@@ -6,6 +6,7 @@ commands:
       - run: 
           name: Error while trying deploy!
           command: echo "Fred, Error!"
+          when: on_fail
 
 jobs:
   smoke_test:
@@ -23,10 +24,7 @@ jobs:
             else
               return 1
             fi
-      - run: 
-          command: only_if_error
-          name: teste
-          when: on_fail
+      - only_if_error
     
   config_infrastructure:
     docker:
