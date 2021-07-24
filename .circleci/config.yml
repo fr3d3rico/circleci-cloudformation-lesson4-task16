@@ -13,6 +13,7 @@ jobs:
               --template-file template.yml \
               --stack-name my-stack-UDACITY-circleci
   wait_infrastructure_creation:
+    machine: true
     steps:
       - run: sleep 120
   config_infrastructure:
