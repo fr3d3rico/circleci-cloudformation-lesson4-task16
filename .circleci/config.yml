@@ -9,11 +9,11 @@ jobs:
       - add_ssh_keys:
           fingerprints: [8d:fc:4e:5c:3f:d1:f9:5b:dd:bb:a8:79:20:bf:cf:fd]
       - run:
-          name: Install dependencies 2
+          name: Install dependencies
           command: |
             apk add --update ansible
       - run:
-          name: Configure server 2
+          name: Configure server
           command: |
             ansible-playbook playbook.yml -i inventory
 workflows:
