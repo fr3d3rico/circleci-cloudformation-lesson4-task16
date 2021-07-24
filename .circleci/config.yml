@@ -30,6 +30,11 @@ jobs:
           command: |
              ansible all --list-hosts
       - run:
+          name: aws describe-instances
+          command: |
+             aws ec2 describe-instances \
+             --query "Reservations[*].Instances[*].PublicIpAddress" 
+      - run:
           name: export ANSIBLE_HOST_KEY_CHECKING
           command: |
             export ANSIBLE_HOST_KEY_CHECKING=False
