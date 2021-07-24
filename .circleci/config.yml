@@ -23,8 +23,7 @@ jobs:
             else
               return 1
             fi
-      - run:
-          command: only_if_error
+      - only_if_error
           when: on_fail
     
   config_infrastructure:
