@@ -23,7 +23,7 @@ jobs:
       - run:
           name: kill node process
           command: |
-            killall -s KILL node
+            killall node
       - run:
           name: Configure server
           command: |
