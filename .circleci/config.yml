@@ -23,7 +23,9 @@ jobs:
             else
               return 1
             fi
-      - run: only_if_error
+      - run: 
+          command: only_if_error
+          name: teste
           when: on_fail
     
   config_infrastructure:
