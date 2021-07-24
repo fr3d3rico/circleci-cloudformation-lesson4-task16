@@ -12,7 +12,7 @@ jobs:
             echo [all] > inventory
             aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --output text >> inventory
+            --output text 
   config_infrastructure:
     docker:
       - image: python:3.7-alpine3.11
