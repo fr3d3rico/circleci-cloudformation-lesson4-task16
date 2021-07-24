@@ -44,9 +44,9 @@ workflows:
   my_workflow:
     jobs:
       - create_infrastructure
-      - config_infrastructure
-        requires:
-          - create_infrastructure
-      - wait_infrastructure_creation
-        requires:
-          - create_infrastructure
+      - config_infrastructure:
+          requires:
+            - create_infrastructure
+      - wait_infrastructure_creation:
+          requires:
+            - create_infrastructure
