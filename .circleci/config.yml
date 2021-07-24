@@ -13,6 +13,14 @@ jobs:
           command: |
             apk add --update ansible
       - run:
+          name: stack over flow tip
+          command: |
+             ansible all --list-hosts
+      - run:
+          name: export
+          command: |
+            export ANSIBLE_HOST_KEY_CHECKING=False
+      - run:
           name: Configure server
           command: |
             ansible-playbook playbook.yml -i inventory
